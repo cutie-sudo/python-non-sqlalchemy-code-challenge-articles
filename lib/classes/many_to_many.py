@@ -14,6 +14,10 @@ class Article:
         author._articles.append(self)  # Add the article to the author's article list
         Article.all.append(self)  # Add the article to the global list of articles
 
+
+    def __str__(self):
+        return f"Article: {self.title}"
+
     @property
     def title(self):
         # Get the title of the article
@@ -43,6 +47,9 @@ class Author:
     def name(self, value):
         # Prevent changing the author's name after it's set
         print("Error: Author's name cannot be changed once set")
+
+    def __str__(self):
+        return f"Author: {self.name}"
 
     def articles(self):
         # Return a list of all the author's articles
@@ -81,6 +88,10 @@ class Magazine:
         self._category = category  # Set the magazine's category
         self._articles = []  # Initialize an empty list to hold the magazine's articles
         Magazine.all.append(self)  # Add this magazine to the global list of magazines
+
+
+    def __str__(self):
+        return f"Magazine: {self.name}"
 
     @property
     def name(self):
@@ -142,3 +153,46 @@ class Magazine:
         if not cls.all:
             return None
         return max(cls.all, key=lambda magazine: len(magazine._articles), default=None)
+
+
+
+# Creating Author instances  
+author1 = Author("Alice Smith")  
+author2 = Author("Bob Johnson")  
+
+# Creating Magazine instances  
+magazine1 = Magazine("Tech Weekly", "Technology")  
+magazine2 = Magazine("Foodie Magazine", "Food")  
+
+# Adding articles for authors  
+author1.add_article(magazine1, "The Future of AI")  
+author1.add_article(magazine2, "Top Vegan Recipes")  
+author2.add_article(magazine1, "Gadgets of 2024")  
+
+# Print out the details  
+print("Authors:")  
+print(author1)  # What articles Alice has written  
+print(author2)  # What articles Bob has written  
+
+print("\nMagazines:")  
+print(magazine1)  # Details of Tech Weekly  
+print(magazine2)  # Details of Foodie Magazine  
+
+print("\nArticles:")  
+for article in Article.all:  # List all articles created  
+    print(article)  
+
+
+
+# Article titles in Foodie Magazine  
+print("\nArticle titles in Foodie Magazine:")  
+print(magazine2.article_titles())  
+
+# Top publisher with the most articles  
+print("\nTop publisher magazine with the most articles:")  
+print(Magazine.top_publisher())
+
+    
+
+
+   
